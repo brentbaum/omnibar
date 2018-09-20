@@ -133,7 +133,6 @@ export default class Omnibar<T> extends React.PureComponent<
   };
 
   handleClickItem = (e: any) => {
-    e.preventDefault();
     if (this.state.hoveredIndex > -1) {
       this.action();
     }
