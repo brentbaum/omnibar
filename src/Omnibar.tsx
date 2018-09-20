@@ -20,6 +20,8 @@ export default class Omnibar<T> extends React.PureComponent<
     render: null, // alias of children
     resultStyle: {},
     rootStyle: { position: 'relative' },
+    queryOnFocus: false,
+    allowEmptyQuery: false,
   };
 
   state: Omnibar.State<T> = {
@@ -89,7 +91,7 @@ export default class Omnibar<T> extends React.PureComponent<
 
   handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const value = evt.target.value;
-    if (value) {
+    if (value || this.props.allowEmptyQuery) {
       this.query(value);
     } else {
       this.reset();
@@ -122,8 +124,12 @@ export default class Omnibar<T> extends React.PureComponent<
     setTimeout(() => this.setState({ displayResults: false }), BLUR_DELAY);
   };
 
-  handleFocus = () => {
-    this.setState({ displayResults: true });
+  handleFocus = (evt: any) => {
+    if (this.props.queryOnFocus) {
+      this.handleChange(evt);
+    } else {
+      this.setState({ displayResults: true });
+    }
   };
 
   handleClickItem = (e: any) => {

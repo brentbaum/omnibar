@@ -52,6 +52,10 @@ declare namespace Omnibar {
     rootStyle?: React.CSSProperties;
     // optional input bar style override
     style?: React.CSSProperties;
+    // optionally search every time omnibar focused
+    queryOnFocus?: boolean;
+    // optionally allow empty searches
+    allowEmptyQuery?: boolean;
   }
 
   interface State<T> {
